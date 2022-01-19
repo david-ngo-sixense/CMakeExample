@@ -1,0 +1,13 @@
+add_library(my_print SHARED src/print_result.cpp)
+
+target_include_directories( my_print PUBLIC
+$<INSTALL_INTERFACE:include>
+$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/my_print/print_result.h ${CMAKE_CURRENT_SOURCE_DIR}/include/my_print/print_result.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/my_print)
+
+install(TARGETS my_print EXPORT my_print_export LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/my_print
+												ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/my_print
+												RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/my_print)
+
+install(EXPORT my_print_export FILE my_print-config.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/my_print)
